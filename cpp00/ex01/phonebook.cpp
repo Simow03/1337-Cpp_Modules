@@ -1,5 +1,4 @@
 #include "PhoneBook.hpp"
-#include "Contact.hpp"
 #include <iostream>
 #include <iomanip>
 
@@ -10,16 +9,16 @@ void Contact::setFirstName(std::string& firstNameInput) {
     firstName = firstNameInput;
 }
 void Contact::setLastName(std::string& lastNameInput) {
-    firstName = lastNameInput;
+    lastName = lastNameInput;
 }
 void Contact::setNickname(std::string& nickNameInput) {
-    firstName = nickNameInput;
+    nickName = nickNameInput;
 }
-void Contact::setPhoneNumber(std::string& number) {
-    firstName = number;
+void Contact::setPhoneNumber(std::string& numberInput) {
+    phoneNumber = numberInput;
 }
-void Contact::setDarkestSecret(std::string& secret) {
-    firstName = secret;
+void Contact::setDarkestSecret(std::string& secretInput) {
+    darkestSecret = secretInput;
 }
 
 std::string Contact::getFirstName() {
@@ -32,10 +31,10 @@ std::string Contact::getNickname() {
     return nickName;
 }
 std::string Contact::getPhoneNumber() {
-    return darkestSecret;
+    return phoneNumber;
 }
 std::string Contact::getDarkestSecret() {
-    return phoneNumber;
+    return darkestSecret;
 }
 
 bool Contact::isEmpty() {
@@ -48,15 +47,16 @@ PhoneBook::PhoneBook() {
     totalContacts = 0;
 }
 
-void PhoneBook::addContact(Contact &contact) {
+bool PhoneBook::addContact(Contact &contact) {
     if (contact.isEmpty()) {
         std::cout << "Error : contact is empty !" << std::endl;
-        return ;
+        return false;
     }
     contacts[currentIndex] = contact;
     currentIndex = (currentIndex + 1) % MAX_CONTACTS;
     if (totalContacts < MAX_CONTACTS)
         totalContacts++;
+    return true;
 }
 
 std::string PhoneBook::truncateText(const std::string &text) {
@@ -80,7 +80,7 @@ void PhoneBook::displayContacts() {
 
 void PhoneBook::displayContact(int index) {
     if (index < 0 || index > totalContacts) {
-        std::cout << "Error : invalid index !";
+        std::cout << "Error : invalid index !" << std::endl;
         return ;
     }
     Contact& contact = contacts[index - 1];
