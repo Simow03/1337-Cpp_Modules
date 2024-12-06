@@ -7,4 +7,6 @@ int main() {
     delete heapZombie;
 
     randomChump("Stack Zombie");
+
+    return 0;
 }
