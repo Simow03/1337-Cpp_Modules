@@ -3,6 +3,11 @@
 #include <iomanip>
 #include "Account.hpp"
 
+
+static int closedAmounts[8];
+static int closedAccountCount = 0;
+
+
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
 int Account::_totalNbDeposits = 0;
@@ -17,7 +22,7 @@ Account::Account(void) {
     _displayTimestamp();
     std::cout << "index:" << _accountIndex
             << ";amount:" << _amount
-            << ";created:" << std::endl;
+            << ";created" << std::endl;
 }
 
 Account::Account(int initial_deposit) {
@@ -30,16 +35,27 @@ Account::Account(int initial_deposit) {
     _displayTimestamp();
     std::cout << "index:" << _accountIndex
             << ";amount:" << _amount
-            << ";created:" << std::endl;
+            << ";created" << std::endl;
 }
 
-Account::~Account(void) {
-    _displayTimestamp();
-    std::cout << "index:" << _accountIndex
-            << ";amount:" << _amount
-            << ";closed:" << std::endl;
+Account::~Account() {
+    static int initialAccountCount = _nbAccounts;
+
+    closedAmounts[closedAccountCount] = _amount;
+    closedAccountCount++;
+    _totalAmount -= _amount;
     _nbAccounts--;
-    _totalAmount -=_amount;
+
+    if (closedAccountCount == initialAccountCount)
+    {
+        for (int i = 0; i < closedAccountCount; i++) 
+        {
+            _displayTimestamp();
+            std::cout << "index:" << i
+                      << ";amount:" << closedAmounts[closedAccountCount - 1 - i]
+                      << ";closed" << std::endl;
+        }
+    }
 }
 
 int Account::getNbAccounts(void) {
@@ -69,7 +85,7 @@ void Account::displayAccountsInfos(void) {
 void Account::makeDeposit(int deposit) {
     _displayTimestamp();
     std::cout << "index:" << _accountIndex
-            << ";p_amount" << _amount;
+            << ";p_amount:" << _amount;
     _amount += deposit;
     _nbDeposits++;
     _totalAmount += deposit;
@@ -77,7 +93,7 @@ void Account::makeDeposit(int deposit) {
 
     std::cout << ";deposit:" << deposit
             << ";amount:" << _amount
-            << ";nb_deposits" << _nbDeposits << std::endl;
+            << ";nb_deposits:" << _nbDeposits << std::endl;
 }
 
 bool Account::makeWithdrawal(int withdrawal) {

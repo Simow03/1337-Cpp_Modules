@@ -16,11 +16,11 @@ public:
     Contact();
 
     // Setter methods
-    void setFirstName(std::string& firstNameInput);
-    void setLastName(std::string& lastNameInput);
-    void setNickname(std::string& nickNameInput);
-    void setPhoneNumber(std::string& number);
-    void setDarkestSecret(std::string& secret);
+    void setFirstName(std::string firstNameInput);
+    void setLastName(std::string lastNameInput);
+    void setNickname(std::string nickNameInput);
+    void setPhoneNumber(std::string number);
+    void setDarkestSecret(std::string secret);
     
     // Getter methods
     std::string getFirstName();
@@ -42,14 +42,14 @@ private:
     int totalContacts;
 
     //Truncate text
-    std::string truncateText(const std::string &text);
+    std::string truncateText(const std::string text);
 
 public:
     //Constructor
     PhoneBook();
 
     // Methods
-    bool addContact(Contact &contact);
+    bool addContact(Contact contact);
     void displayContacts();
     void displayContact(int index);
     int getContactCount();

@@ -5,19 +5,19 @@
 Contact::Contact() {
 }
 
-void Contact::setFirstName(std::string& firstNameInput) {
+void Contact::setFirstName(std::string firstNameInput) {
     firstName = firstNameInput;
 }
-void Contact::setLastName(std::string& lastNameInput) {
+void Contact::setLastName(std::string lastNameInput) {
     lastName = lastNameInput;
 }
-void Contact::setNickname(std::string& nickNameInput) {
+void Contact::setNickname(std::string nickNameInput) {
     nickName = nickNameInput;
 }
-void Contact::setPhoneNumber(std::string& numberInput) {
+void Contact::setPhoneNumber(std::string numberInput) {
     phoneNumber = numberInput;
 }
-void Contact::setDarkestSecret(std::string& secretInput) {
+void Contact::setDarkestSecret(std::string secretInput) {
     darkestSecret = secretInput;
 }
 
@@ -36,6 +36,9 @@ std::string Contact::getPhoneNumber() {
 std::string Contact::getDarkestSecret() {
     return darkestSecret;
 }
+int PhoneBook::getContactCount() {
+    return totalContacts;
+}
 
 bool Contact::isEmpty() {
     return (firstName.empty() || lastName.empty() || nickName.empty() ||
@@ -47,7 +50,7 @@ PhoneBook::PhoneBook() {
     totalContacts = 0;
 }
 
-bool PhoneBook::addContact(Contact &contact) {
+bool PhoneBook::addContact(Contact contact) {
     if (contact.isEmpty()) {
         std::cout << "Error : contact is empty !" << std::endl;
         return false;
@@ -59,7 +62,7 @@ bool PhoneBook::addContact(Contact &contact) {
     return true;
 }
 
-std::string PhoneBook::truncateText(const std::string &text) {
+std::string PhoneBook::truncateText(const std::string text) {
     if (text.length() <= 10)
         return text;
     return text.substr(0, 9) + ".";
@@ -79,7 +82,7 @@ void PhoneBook::displayContacts() {
 }
 
 void PhoneBook::displayContact(int index) {
-    if (index < 0 || index > totalContacts) {
+    if (index <= 0 || index > totalContacts) {
         std::cout << "Error : invalid index !" << std::endl;
         return ;
     }
@@ -89,8 +92,4 @@ void PhoneBook::displayContact(int index) {
     std::cout << "Nick Name : " << contact.getNickname() << std::endl;
     std::cout << "Darkest Secret : " << contact.getDarkestSecret() << std::endl;
     std::cout << "Phone Number : " << contact.getPhoneNumber() << std::endl;
-}
-
-int PhoneBook::getContactCount() {
-    return totalContacts;
 }

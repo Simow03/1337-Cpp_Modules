@@ -55,7 +55,7 @@ int main() {
             std::cout << "Enter Contact index to view details : ";
             std::getline(std::cin, indexStr);
 
-            index = std::stoi(indexStr);
+            index = atoi(indexStr.c_str());
             PhoneBook.displayContact(index);
         }
         else if (!command.empty()) {
