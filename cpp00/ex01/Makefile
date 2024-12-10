@@ -6,18 +6,25 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRCS = main.cpp PhoneBook.cpp
 
+HEADERS = PhoneBook.hpp
+
 OBJS = ${SRCS:.cpp=.o}
+
+DEPS = ${HEADERS}
 
 all: ${NAME}
 
 ${NAME}: ${OBJS}
 	${CXX} ${CXXFLAGS} ${OBJS} -o ${NAME}
 
+%.o : %.cpp ${DEPS}
+	${CXX} ${CXXFLAGS}  -c $< -o $@
+
 clean:
-	rm -f $(OBJS)
+	rm -f ${OBJS}
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f ${NAME}
 
 re: fclean all
 

@@ -1,6 +1,16 @@
 #include "PhoneBook.hpp"
 #include <iostream>
 #include <string>
+#include <cctype>
+
+bool isPrintable(std::string input) {
+    for (size_t i = 0; i < input.length(); i++) {
+        if (!isprint(input[i])) {
+            return false;
+        }
+    }
+    return true;
+}
 
 int main() {
     PhoneBook PhoneBook;
@@ -13,6 +23,8 @@ int main() {
     {
         std::cout << "> ";
         std::getline(std::cin, command);
+        if (std::cin.fail())
+            exit(EXIT_FAILURE);
         if (command == "EXIT")
             break ;
         else if (command == "ADD") {
@@ -21,22 +33,47 @@ int main() {
             
             std::cout << "Enter First name : ";
             std::getline(std::cin, input);
+            if (!isPrintable(input))
+            {
+                std::cout << "Error : Invalid character !" << std::endl;
+                exit(EXIT_FAILURE);
+            }
             newContact.setFirstName(input);
 
             std::cout << "Enter Last name : ";
             std::getline(std::cin, input);
+            if (!isPrintable(input))
+            {
+                std::cout << "Error : Invalid character !" << std::endl;
+                exit(EXIT_FAILURE);
+            }
             newContact.setLastName(input);
 
             std::cout << "Enter Nickname : ";
             std::getline(std::cin, input);
+            if (!isPrintable(input))
+            {
+                std::cout << "Error : Invalid character !" << std::endl;
+                exit(EXIT_FAILURE);
+            }
             newContact.setNickname(input);
 
             std::cout << "Enter Phone Number : ";
             std::getline(std::cin, input);
+            if (!isPrintable(input))
+            {
+                std::cout << "Error : Invalid character !" << std::endl;
+                exit(EXIT_FAILURE);
+            }
             newContact.setPhoneNumber(input);
 
             std::cout << "Enter Darkest Secret : ";
             std::getline(std::cin, input);
+            if (!isPrintable(input))
+            {
+                std::cout << "Error : Invalid character !" << std::endl;
+                exit(EXIT_FAILURE);
+            }
             newContact.setDarkestSecret(input);
 
             if (PhoneBook.addContact(newContact))
