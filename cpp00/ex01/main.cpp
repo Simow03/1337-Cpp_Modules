@@ -1,7 +1,7 @@
 #include "PhoneBook.hpp"
+#include "Contact.hpp"
 #include <iostream>
 #include <string>
-#include <cctype>
 
 bool isPrintable(std::string input) {
     for (size_t i = 0; i < input.length(); i++) {
@@ -23,7 +23,7 @@ int main() {
     {
         std::cout << "> ";
         std::getline(std::cin, command);
-        if (std::cin.fail())
+        if (std::cin.eof())
             exit(EXIT_FAILURE);
         if (command == "EXIT")
             break ;
@@ -36,7 +36,7 @@ int main() {
             if (!isPrintable(input))
             {
                 std::cout << "Error : Invalid character !" << std::endl;
-                exit(EXIT_FAILURE);
+                continue;
             }
             newContact.setFirstName(input);
 
@@ -45,7 +45,7 @@ int main() {
             if (!isPrintable(input))
             {
                 std::cout << "Error : Invalid character !" << std::endl;
-                exit(EXIT_FAILURE);
+                continue;
             }
             newContact.setLastName(input);
 
@@ -54,7 +54,7 @@ int main() {
             if (!isPrintable(input))
             {
                 std::cout << "Error : Invalid character !" << std::endl;
-                exit(EXIT_FAILURE);
+                continue;
             }
             newContact.setNickname(input);
 
@@ -63,7 +63,7 @@ int main() {
             if (!isPrintable(input))
             {
                 std::cout << "Error : Invalid character !" << std::endl;
-                exit(EXIT_FAILURE);
+                continue;
             }
             newContact.setPhoneNumber(input);
 
@@ -72,7 +72,7 @@ int main() {
             if (!isPrintable(input))
             {
                 std::cout << "Error : Invalid character !" << std::endl;
-                exit(EXIT_FAILURE);
+                continue;
             }
             newContact.setDarkestSecret(input);
 

@@ -4,9 +4,9 @@ CXX = c++
 
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = main.cpp PhoneBook.cpp
+SRCS = main.cpp PhoneBook.cpp Contact.cpp
 
-HEADERS = PhoneBook.hpp
+HEADERS = PhoneBook.hpp Contact.hpp
 
 OBJS = ${SRCS:.cpp=.o}
 
