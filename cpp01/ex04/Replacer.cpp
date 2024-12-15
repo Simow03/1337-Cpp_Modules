@@ -6,9 +6,9 @@ outFileName(inFileInput + ".replace"),
 s1(s1Input),
 s2(s2Input) {}
 
-bool Replacer::isReadable( std::string inFile ) {
+bool Replacer::isReadable( std::string& inFile ) {
     std::ifstream inFileStream(inFile);
-    return (inFileStream.fail());
+    return (inFileStream.good());
 }
 
 void Replacer::replace() {
@@ -22,9 +22,13 @@ void Replacer::replace() {
     }
 
     std::ifstream inFile(inFileName);
+    if (!inFile) {
+        std::cerr << "Error: Failed to open input file !" << std::endl;
+        return ;
+    }
     std::ofstream outFile(outFileName);
     if (!outFile) {
-        std::cerr << "Error: Failed to create output file." << std::endl;
+        std::cerr << "Error: Failed to create output file !" << std::endl;
         inFile.close();
         return ;
     }
@@ -33,13 +37,15 @@ void Replacer::replace() {
 
     while (std::getline(inFile, readed)) {
         size_t pos = 0;
-        while (pos = readed.find(s1, pos) != std::string::npos)
-        {
+        while (true) {
+            pos = readed.find(s1, pos);
+            if (pos == std::string::npos)
+                break ;
             readed.erase(pos, s1.length());
             readed.insert(pos, s2);
             pos += s2.length();
         }
-        
+
         outFile << readed << std::endl;
     }
 

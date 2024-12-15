@@ -10,7 +10,7 @@ private:
     std::string outFileName;
     std::string s1;
     std::string s2;
-    bool isReadable( std::string inFile );
+    bool isReadable( std::string& inFile );
 
 public:
     Replacer( const std::string& inFileInput, const std::string& s1Input, const std::string& s2Input );
