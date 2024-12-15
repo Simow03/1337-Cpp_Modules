@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include "Replacer.hpp"
 
 int main(int argc, char **argv) {
     if (argc != 4) {
@@ -7,16 +8,10 @@ int main(int argc, char **argv) {
         std::cerr << "Usage : " << argv[0] << " <filename> <s1> <s2>" << std::endl;
         return 1;
     }
-    std::string readed;
-    std::ifstream inFile(argv[1]);
 
-    if (inFile.fail()) {
-        std::cerr << "Error : Could not open file !" << std::endl;
-        return 1;
-    }
+    Replacer replacer(argv[1], argv[2], argv[3]);
 
-    while (std::getline(inFile, readed)) {
-    }
-    
-    inFile.close();
+    replacer.replace();
+
+    return 0;
 }

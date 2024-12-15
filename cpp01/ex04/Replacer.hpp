@@ -6,15 +6,15 @@
 class Replacer {
 
 private:
-    std::string inFile;
-    std::string outFile;
+    std::string inFileName;
+    std::string outFileName;
     std::string s1;
     std::string s2;
+    bool isReadable( std::string inFile );
 
 public:
-    Replacer( std::string& inFileInput, std::string& s1Input, std::string& s2Input );
-    bool isEmpty( std::string str );
-    bool isReadable( std::string inFile );
+    Replacer( const std::string& inFileInput, const std::string& s1Input, const std::string& s2Input );
+    void replace( void );
 };
 
 #endif
