@@ -11,7 +11,11 @@ private:
     void error( void );
 
 public:
+    Harl();
     void complain( std::string level );
+    typedef void (Harl::*HarlFunctions)();
+
+    HarlFunctions ptr[4];
 };
 
 #endif
