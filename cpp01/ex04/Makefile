@@ -4,9 +4,9 @@ CXX = c++
 
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = main.cpp Replacer.cpp
+SRCS = main.cpp Replacer.cpp Tests.cpp
 
-HEADERS = Replacer.hpp
+HEADERS = Replacer.hpp Tests.hpp
 
 OBJS = ${SRCS:.cpp=.o}
 
