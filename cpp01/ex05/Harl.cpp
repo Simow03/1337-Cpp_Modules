@@ -1,10 +1,11 @@
 #include "Harl.hpp"
 
-Harl::Harl() {
-    ptr[0] = &Harl::debug;
-    ptr[1] = &Harl::info;
-    ptr[2] = &Harl::warning;
-    ptr[3] = &Harl::error;
+Harl::Harl()
+{
+    HarlFunctions[0] = &Harl::debug;
+    HarlFunctions[1] = &Harl::info;
+    HarlFunctions[2] = &Harl::warning;
+    HarlFunctions[3] = &Harl::error;
 }
 
 void Harl::debug(void)
@@ -35,10 +36,12 @@ void Harl::complain(std::string level)
 {
     std::string harlStrings[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
-    for (size_t i = 0; i < 4; i++) {
-        if (level == harlStrings[i]) {
-            (this->*ptr[i])();
-            return ;
+    for (size_t i = 0; i < 4; i++)
+    {
+        if (level == harlStrings[i])
+        {
+            (this->*HarlFunctions[i])();
+            return;
         }
     }
 

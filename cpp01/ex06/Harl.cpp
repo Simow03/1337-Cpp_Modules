@@ -1,10 +1,11 @@
 #include "Harl.hpp"
 
-Harl::Harl() {
-    ptr[0] = &Harl::debug;
-    ptr[1] = &Harl::info;
-    ptr[2] = &Harl::warning;
-    ptr[3] = &Harl::error;
+Harl::Harl()
+{
+    HarlFunctions[0] = &Harl::debug;
+    HarlFunctions[1] = &Harl::info;
+    HarlFunctions[2] = &Harl::warning;
+    HarlFunctions[3] = &Harl::error;
 }
 
 void Harl::debug(void)
@@ -33,17 +34,13 @@ void Harl::error(void)
 
 void Harl::complain(std::string level)
 {
-    std::string levels[4] = {
-        "DEBUG",
-        "INFO",
-        "WARNING",
-        "ERROR"
-    };
+    std::string harlStrings[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
     int levelIndex = -1;
 
     for (size_t i = 0; i < 4; i++)
     {
-        if (levels[i] == level) {
+        if (harlStrings[i] == level)
+        {
             levelIndex = i;
             break;
         }
@@ -51,19 +48,18 @@ void Harl::complain(std::string level)
     switch (levelIndex)
     {
     case 0:
-        (this->*ptr[0])();
+        (this->*HarlFunctions[0])();
         break;
     case 1:
-        (this->*ptr[1])();
+        (this->*HarlFunctions[1])();
         break;
     case 2:
-        (this->*ptr[2])();
+        (this->*HarlFunctions[2])();
         break;
     case 3:
-        (this->*ptr[3])();
+        (this->*HarlFunctions[3])();
         break;
     default:
         std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
     }
-
 }
