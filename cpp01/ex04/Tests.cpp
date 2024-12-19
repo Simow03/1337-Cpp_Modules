@@ -1,6 +1,5 @@
 #include "Tests.hpp"
 #include "Replacer.hpp"
-#include <fstream>
 #include <cstdio>
 
 void Tests::createTestFile(const std::string &filename, const std::string &content)

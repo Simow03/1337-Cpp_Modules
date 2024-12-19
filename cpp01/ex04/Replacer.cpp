@@ -6,18 +6,9 @@ outFileName(inFileInput + ".replace"),
 s1(s1Input),
 s2(s2Input) {}
 
-bool Replacer::isReadable( std::string& inFile ) {
-    std::ifstream inFileStream(inFile);
-    return (inFileStream.good());
-}
-
 void Replacer::replace() {
     if (s1.empty()) {
         std::cerr << "Error: Search string is empty !" << std::endl;
-        return ;
-    }
-    if (!isReadable(inFileName)) {
-        std::cerr << "Error : Could not open file !" << std::endl;
         return ;
     }
 
