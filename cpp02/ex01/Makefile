@@ -1,4 +1,4 @@
-NAME = fixedPoint00
+NAME = fixedPoint01
 
 CXX = c++
 
