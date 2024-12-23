@@ -17,12 +17,12 @@ public:
 
     Fixed& operator=(const Fixed& other);
 
-    bool& operator>(const Fixed& other);
-    bool& operator<(const Fixed& other);
-    bool& operator>=(const Fixed& other);
-    bool& operator<=(const Fixed& other);
-    bool& operator==(const Fixed& other);
-    bool& operator!=(const Fixed& other);
+    bool operator>(const Fixed& other);
+    bool operator<(const Fixed& other);
+    bool operator>=(const Fixed& other);
+    bool operator<=(const Fixed& other);
+    bool operator==(const Fixed& other);
+    bool operator!=(const Fixed& other);
 
     Fixed operator+(const Fixed& other);
     Fixed operator-(const Fixed& other);
@@ -30,8 +30,8 @@ public:
     Fixed operator/(const Fixed& other);
 
     Fixed& operator++();
-    Fixed operator--(int);
-    Fixed& operator++();
+    Fixed operator++(int);
+    Fixed& operator--();
     Fixed operator--(int);
 
     static Fixed& min(Fixed &a, Fixed &b);
