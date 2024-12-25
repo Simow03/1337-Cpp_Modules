@@ -47,51 +47,51 @@ int Fixed::toInt() const
     return value >> fractionalBit;
 }
 
-bool Fixed::operator>(const Fixed &other)
+bool Fixed::operator>(const Fixed &other) const
 {
     return (this->value > other.value);
 }
 
-bool Fixed::operator<(const Fixed &other)
+bool Fixed::operator<(const Fixed &other) const
 {
     return (this->value < other.value);
 }
 
-bool Fixed::operator>=(const Fixed &other)
+bool Fixed::operator>=(const Fixed &other) const
 {
     return (this->value >= other.value);
 }
 
-bool Fixed::operator<=(const Fixed &other)
+bool Fixed::operator<=(const Fixed &other) const
 {
     return (this->value <= other.value);
 }
 
-bool Fixed::operator==(const Fixed &other)
+bool Fixed::operator==(const Fixed &other) const
 {
     return (this->value == other.value);
 }
 
-bool Fixed::operator!=(const Fixed &other)
+bool Fixed::operator!=(const Fixed &other) const
 {
     return (this->value != other.value);
 }
 
-Fixed Fixed::operator+(const Fixed &other)
+Fixed Fixed::operator+(const Fixed &other) const
 {
     Fixed fixed;
     fixed.setRawBits(this->value + other.value);
     return fixed;
 }
 
-Fixed Fixed::operator-(const Fixed &other)
+Fixed Fixed::operator-(const Fixed &other) const
 {
     Fixed fixed;
     fixed.setRawBits(this->value - other.value);
     return fixed;
 }
 
-Fixed Fixed::operator*(const Fixed &other)
+Fixed Fixed::operator*(const Fixed &other) const
 {
     Fixed fixed;
     long long tmp = (long long)this->value * other.value;
@@ -99,7 +99,7 @@ Fixed Fixed::operator*(const Fixed &other)
     return fixed;
 }
 
-Fixed Fixed::operator/(const Fixed &other)
+Fixed Fixed::operator/(const Fixed &other) const
 {
     Fixed fixed;
     if (other.value != 0)
