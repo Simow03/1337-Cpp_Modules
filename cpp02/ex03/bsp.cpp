@@ -3,7 +3,7 @@
 Fixed areaCalculator(Point const i, Point const j, Point const k) {
     float value = ((i.getX().toFloat() * (j.getY().toFloat() - k.getY().toFloat()))
     + (j.getX().toFloat() * (k.getY().toFloat() - i.getY().toFloat()))
-    + (k.getX().toFloat() * (i.getY().toFloat - j.getY().toFloat()))) / 2;
+    + (k.getX().toFloat() * (i.getY().toFloat() - j.getY().toFloat()))) / 2;
 
     return Fixed(value);
 }
@@ -15,11 +15,11 @@ bool haveSameSign(float a, float b, float c) {
 bool bsp(Point const a,  Point const b, Point const c, Point const point)
 {
     Fixed abp = areaCalculator(a, b, point);
-    Fixed acp = areaCalculator(a, c, point);
+    Fixed cap = areaCalculator(c, a, point);
     Fixed bcp = areaCalculator(b, c, point);
 
-    if (abp.toFloat() == 0 || acp.toFloat() == 0 || bcp.toFloat() == 0)
+    if (abp.toFloat() == 0 || cap.toFloat() == 0 || bcp.toFloat() == 0)
         return false;
 
-    return (haveSameSign(abp.toFloat(), acp.toFloat(), bcp.toFloat()));
+    return (haveSameSign(abp.toFloat(), cap.toFloat(), bcp.toFloat()));
 }

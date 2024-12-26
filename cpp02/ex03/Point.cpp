@@ -4,28 +4,21 @@ Point::Point() : x(0), y(0) {};
 
 Point::Point(const float xVal, const float yVal) : x(xVal), y(yVal) {};
 
-Point::Point(const Point &point)
+Point::Point(const Point &point) : x(point.getX()), y(point.getY()) {};
+
+Fixed Point::getX() const
 {
-    *this = point;
+    return this->x;
 }
 
-Fixed Point::getX()
+Fixed Point::getY() const
 {
-    return x;
-}
-
-Fixed Point::getY()
-{
-    return y;
+    return this->y;
 }
 
 Point &Point::operator=(const Point &point)
 {
-    if (this != &point)
-    {
-        this->x = point.getX();
-        this->y = point.getY();
-    }
+    (void)point;
     return *this;
 }
 
