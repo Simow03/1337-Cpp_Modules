@@ -41,10 +41,10 @@ void vertexPoint() {
 
 void onEdgePoint() {
     std::cout << "Test case : on edge" << std::endl;
-    Point a(5, 5);
-    Point b(7, 7);
-    Point c(10, 10);
-    Point point(7, 3);
+    Point a(-1, 1);
+    Point b(2, 1);
+    Point c(-1, -1);
+    Point point(-1, 0);
 
     if (bsp(a, b, c, point) == true)
         std::cout << "Result : \033[32mTRUE\033[0m" << std::endl;
