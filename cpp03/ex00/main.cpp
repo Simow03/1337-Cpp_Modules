@@ -10,6 +10,10 @@ int main() {
     robot.attack("Enemy");
     robot.takeDamage(5);
     robot.beRepaired(3);
+    robot.takeDamage(12);
+    robot.attack("Enemy");
+    robot.takeDamage(5);
+    robot.beRepaired(3);
 
     return 0;
 }
