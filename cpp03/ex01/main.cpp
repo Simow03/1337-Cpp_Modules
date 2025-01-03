@@ -1,19 +1,17 @@
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
-int main() {
-    ClapTrap default_robot;
-    ClapTrap robot("R2D2");
-    ClapTrap robot_copy(robot);
-    ClapTrap another_robot;
-    another_robot = robot;
-    
-    robot.attack("Enemy");
-    robot.takeDamage(5);
-    robot.beRepaired(3);
-    robot.takeDamage(12);
-    robot.attack("Enemy");
-    robot.takeDamage(5);
-    robot.beRepaired(3);
+int main()
+{
+    ScavTrap scav1("Guardian");
+    ScavTrap scav2(scav1);
+
+    scav1.attack("Enemy");
+    scav1.takeDamage(30);
+    scav1.beRepaired(15);
+    scav1.guardGate();
+
+
 
     return 0;
 }

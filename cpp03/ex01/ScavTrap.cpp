@@ -1,25 +1,25 @@
 #include "ScavTrap.hpp"
 #include "ClapTrap.hpp"
 
-ScavTrap::ScavTrap()
+ScavTrap::ScavTrap() : ClapTrap()
 {
     setAttributes("Default", 100, 50, 20);
     std::cout << "ScavTrap Default constructor called." << std::endl;
 };
 
-ScavTrap::ScavTrap(const std::string &_name)
+ScavTrap::ScavTrap(const std::string &_name) : ClapTrap(_name)
 {
     setAttributes(_name, 100, 50, 20);
     std::cout << "ScavTrap " << getName() << " is being constructed .." << std::endl;
 };
 
-ScavTrap::ScavTrap(const ScavTrap &other)
+ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other)
 {
     setAttributes(other.getName(), other.getHitPoints(), other.getEnergyPoints(), other.getAttackDamage());
     std::cout << "ScavTrap copy constructor is called." << std::endl;
 }
 
-ScavTrap &ScavTrap::operator=(ScavTrap &other)
+ScavTrap &ScavTrap::operator=(const ScavTrap &other)
 {
 
     if (this != &other)
