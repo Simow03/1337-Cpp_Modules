@@ -1,8 +1,11 @@
 #include "ClapTrap.hpp"
 
+const std::string CYAN = "\033[38;5;117m";
+const std::string RESET = "\033[0m";
+
 ClapTrap::ClapTrap() : name("Default"), hitPoints(10), energyPoints(10), attackDamage(0)
 {
-    std::cout << "ClapTrap Default constructor called." << std::endl;
+    std::cout << CYAN << "ClapTrap " << RESET << "Default constructor called." << std::endl;
 };
 
 ClapTrap::ClapTrap(const std::string &_name)
@@ -11,7 +14,7 @@ ClapTrap::ClapTrap(const std::string &_name)
       energyPoints(10),
       attackDamage(0)
 {
-    std::cout << "ClapTrap " << name << " is being constructed .." << std::endl;
+    std::cout << CYAN << "ClapTrap " << RESET << name << " is being constructed .." << std::endl;
 };
 
 ClapTrap::ClapTrap(const ClapTrap &other)
@@ -19,7 +22,7 @@ ClapTrap::ClapTrap(const ClapTrap &other)
       energyPoints(other.energyPoints),
       attackDamage(other.attackDamage)
 {
-    std::cout << "ClapTrap copy constructor is called." << std::endl;
+    std::cout << CYAN << "ClapTrap " << RESET << "copy constructor is called." << std::endl;
 }
 
 ClapTrap &ClapTrap::operator=(ClapTrap &other)
@@ -32,13 +35,13 @@ ClapTrap &ClapTrap::operator=(ClapTrap &other)
         energyPoints = other.energyPoints;
         attackDamage = other.attackDamage;
     }
-    std::cout << "ClapTrap copy assignment operator called" << std::endl;
+    std::cout << CYAN << "ClapTrap " << RESET << "copy assignment operator called" << std::endl;
     return *this;
 }
 
 ClapTrap::~ClapTrap()
 {
-    std::cout << "ClapTrap " << name << " is getting destroyed !" << std::endl;
+    std::cout << CYAN << "ClapTrap " << RESET << name << " is getting destroyed !" << std::endl;
 };
 
 void ClapTrap::setAttributes(const std::string &_name, unsigned int _hitPoints, unsigned int _energyPoints, unsigned int _attackDamage)
@@ -70,19 +73,19 @@ void ClapTrap::attack(const std::string &target)
 {
     if (energyPoints == 0)
     {
-        std::cout << "ClapTrap " << name << " Can't attack. No energy points left !" << std::endl;
+        std::cout << CYAN << "ClapTrap " << RESET << name << " Can't attack. No energy points left !" << std::endl;
         return;
     }
 
     if (hitPoints == 0)
     {
-        std::cout << "ClapTrap " << name << " Can't attack. No hit points left !" << std::endl;
+        std::cout << CYAN << "ClapTrap " << RESET << name << " Can't attack. No hit points left !" << std::endl;
         return;
     }
 
     energyPoints--;
 
-    std::cout << "ClapTrap "
+    std::cout << CYAN << "ClapTrap " << RESET
               << name << " attacks "
               << target << " causing "
               << attackDamage << " points of damage!"
@@ -93,7 +96,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 {
     if (hitPoints == 0)
     {
-        std::cout << "ClapTrap " << name << " is already defeated!" << std::endl;
+        std::cout << CYAN << "ClapTrap " << RESET << name << " is already defeated!" << std::endl;
         return;
     }
 
@@ -104,7 +107,7 @@ void ClapTrap::takeDamage(unsigned int amount)
     {
         hitPoints -= amount;
     }
-    std::cout << "ClapTrap "
+    std::cout << CYAN << "ClapTrap " << RESET
               << name << " took "
               << amount << " points of damage! Hit points remaining : "
               << hitPoints << std::endl;
@@ -114,19 +117,19 @@ void ClapTrap::beRepaired(unsigned int amount)
 {
     if (energyPoints == 0)
     {
-        std::cout << "ClapTrap " << name << " Can't be repaired. No energy points left !" << std::endl;
+        std::cout << CYAN << "ClapTrap " << RESET << name << " Can't be repaired. No energy points left !" << std::endl;
         return;
     }
 
     if (hitPoints == 0)
     {
-        std::cout << "ClapTrap " << name << " Can't be repaired. No hit points left !" << std::endl;
+        std::cout << CYAN << "ClapTrap " << RESET << name << " Can't be repaired. No hit points left !" << std::endl;
         return;
     }
 
     energyPoints--;
     hitPoints += amount;
-    std::cout << "ClapTrap " << name
+    std::cout << CYAN << "ClapTrap " << RESET << name
               << " is repairing itself for " << amount
               << ". Current hit points : " << hitPoints
               << std::endl;
