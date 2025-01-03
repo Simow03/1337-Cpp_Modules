@@ -55,7 +55,7 @@ void ClapTrap::attack(const std::string &target)
         return;
     }
 
-    this->energyPoints--;
+    energyPoints--;
 
     std::cout << "ClapTrap "
               << name << " attacks "
@@ -66,7 +66,7 @@ void ClapTrap::attack(const std::string &target)
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-    if (this->hitPoints == 0)
+    if (hitPoints == 0)
     {
         std::cout << "ClapTrap " << name << " is already defeated!" << std::endl;
         return;
@@ -80,7 +80,7 @@ void ClapTrap::takeDamage(unsigned int amount)
         hitPoints -= amount;
     }
     std::cout << "ClapTrap "
-              << this->name << " took "
+              << name << " took "
               << amount << " points of damage! Hit points remaining : "
               << hitPoints << std::endl;
 }
