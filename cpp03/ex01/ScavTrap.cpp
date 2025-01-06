@@ -6,19 +6,28 @@ const std::string RESET = "\033[0m";
 
 ScavTrap::ScavTrap() : ClapTrap()
 {
-    setAttributes("Default", 100, 50, 20);
+    this->name = "Default";
+    this->hitPoints = 100;
+    this->energyPoints = 50;
+    this->attackDamage = 20;
     std::cout << YELLOW << "ScavTrap " << RESET << "Default constructor called." << std::endl;
 };
 
 ScavTrap::ScavTrap(const std::string &_name) : ClapTrap(_name)
 {
-    setAttributes(_name, 100, 50, 20);
-    std::cout << YELLOW << "ScavTrap " << RESET << getName() << " is being constructed .." << std::endl;
+    this->name = _name;
+    this->hitPoints = 100;
+    this->energyPoints = 50;
+    this->attackDamage = 20;
+    std::cout << YELLOW << "ScavTrap " << RESET << this->name << " is being constructed .." << std::endl;
 };
 
 ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other)
 {
-    setAttributes(other.getName(), other.getHitPoints(), other.getEnergyPoints(), other.getAttackDamage());
+    this->name = other.name;
+    this->hitPoints = other.hitPoints;
+    this->energyPoints = other.energyPoints;
+    this->attackDamage = other.attackDamage;
     std::cout << YELLOW << "ScavTrap " << RESET << "copy constructor is called." << std::endl;
 }
 
@@ -27,7 +36,10 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &other)
 
     if (this != &other)
     {
-        setAttributes(other.getName(), other.getHitPoints(), other.getEnergyPoints(), other.getAttackDamage());
+        this->name = other.name;
+        this->hitPoints = other.hitPoints;
+        this->energyPoints = other.energyPoints;
+        this->attackDamage = other.attackDamage;
     }
     std::cout << YELLOW << "ScavTrap " << RESET << "copy assignment operator called" << std::endl;
     return *this;
@@ -35,32 +47,33 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &other)
 
 ScavTrap::~ScavTrap()
 {
-    std::cout << YELLOW << "ScavTrap " << RESET << getName() << " is getting destroyed !" << std::endl;
+    std::cout << YELLOW << "ScavTrap " << RESET << this->name << " is getting destroyed !" << std::endl;
 };
 
 void ScavTrap::attack(const std::string &target)
 {
-    if (getEnergyPoints() == 0)
+    if (energyPoints == 0)
     {
-        std::cout << YELLOW << "ScavTrap " << RESET << getName() << " Can't attack. No energy points left !" << std::endl;
+        std::cout << YELLOW << "ScavTrap " << RESET << this->name << " Can't attack. No energy points left !" << std::endl;
         return;
     }
 
-    if (getHitPoints() == 0)
+    if (hitPoints == 0)
     {
-        std::cout << YELLOW << "ScavTrap " << RESET << getName() << " Can't attack. No hit points left !" << std::endl;
+        std::cout << YELLOW << "ScavTrap " << RESET << this->name << " Can't attack. No hit points left !" << std::endl;
         return;
     }
 
-    setAttributes(getName(), getHitPoints(), getEnergyPoints() - 1, getAttackDamage());
+    energyPoints -= 1;
 
     std::cout << YELLOW << "ScavTrap " << RESET
-              << getName() << " attacks "
+              << this->name << " attacks "
               << target << " causing "
-              << getAttackDamage() << " points of damage!"
+              << this->attackDamage << " points of damage!"
               << std::endl;
 }
 
-void ScavTrap::guardGate() {
-    std::cout << YELLOW << "ScavTrap " << RESET << getName() << " is now in Gate keeper mode." << std::endl;
+void ScavTrap::guardGate()
+{
+    std::cout << YELLOW << "ScavTrap " << RESET << this->name << " is now in Gate keeper mode." << std::endl;
 }
