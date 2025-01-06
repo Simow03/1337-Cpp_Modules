@@ -7,22 +7,21 @@ const std::string UNDERLINE = "\033[4m";
 
 int main()
 {
-    std::cout << RED << UNDERLINE << BOLD << "\n\tConstructing:\n" << RESET << std::endl;
+    std::cout << RED << UNDERLINE << BOLD << "\n\tConstructing:\n"
+              << RESET << std::endl;
     DiamondTrap diamond("Hybrid");
 
-    std::cout << RED << UNDERLINE << BOLD << "\n\tMember functions:\n" << RESET << std::endl;
-    std::cout << "initial hit points : " << diamond.getHitPoints() << std::endl;
-    std::cout << "initial energy points : " << diamond.getEnergyPoints() << std::endl;
-    std::cout << "initial attack damage points : " << diamond.getAttackDamage() << std::endl;
+    std::cout << RED << UNDERLINE << BOLD << "\n\tMember functions:\n"
+              << RESET << std::endl;
+    diamond.attack("Enemy");
+    diamond.takeDamage(30);
+    diamond.beRepaired(20);
+    diamond.highFivesGuys();
+    diamond.guardGate();
     diamond.whoAmI();
 
-    std::cout << RED << UNDERLINE << BOLD << "\n\tDestructing:\n" << RESET << std::endl;
+    std::cout << RED << UNDERLINE << BOLD << "\n\tDestructing:\n"
+              << RESET << std::endl;
 
     return 0;
 }
-
-// diamond.attack("Enemy");
-// diamond.takeDamage(30);
-// diamond.beRepaired(20);
-// diamond.highFivesGuys();
-// diamond.guardGate();

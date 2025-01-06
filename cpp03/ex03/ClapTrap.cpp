@@ -44,31 +44,6 @@ ClapTrap::~ClapTrap()
     std::cout << CYAN << "ClapTrap " << RESET << name << " is getting destroyed !" << std::endl;
 };
 
-void ClapTrap::setAttributes(const std::string &_name, unsigned int _hitPoints, unsigned int _energyPoints, unsigned int _attackDamage)
-{
-    name = _name;
-    hitPoints = _hitPoints;
-    energyPoints = _energyPoints;
-    attackDamage = _attackDamage;
-}
-
-std::string ClapTrap::getName(void) const
-{
-    return name;
-};
-unsigned int ClapTrap::getHitPoints(void) const
-{
-    return hitPoints;
-};
-unsigned int ClapTrap::getEnergyPoints(void) const
-{
-    return energyPoints;
-};
-unsigned int ClapTrap::getAttackDamage(void) const
-{
-    return attackDamage;
-};
-
 void ClapTrap::attack(const std::string &target)
 {
     if (energyPoints == 0)
