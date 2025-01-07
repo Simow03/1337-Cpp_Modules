@@ -8,21 +8,20 @@ const std::string UNDERLINE = "\033[4m";
 
 int main()
 {
-    std::cout << RED << UNDERLINE << BOLD << "\n\t Constructing:\n" << RESET << std::endl;
-    ScavTrap scav1("Guardian");
-    ScavTrap scav2(scav1);
+    std::cout << RED << UNDERLINE << BOLD << "\n\tConstructing:\n" << RESET << std::endl;
+    ScavTrap scav1("ST01-1");
 
-    std::cout << RED << UNDERLINE << BOLD << "\n\t Member functions:\n" << RESET << std::endl;
-    scav1.attack("Enemy");
+    std::cout << RED << UNDERLINE << BOLD << "\n\tMember functions:\n" << RESET << std::endl;
+    scav1.attack("ST01-2");
     scav1.takeDamage(30);
     scav1.beRepaired(15);
-    scav1.guardGate();
     scav1.takeDamage(101);
     scav1.beRepaired(5);
-    scav1.attack("Enemy");
+    scav1.attack("ST01-2");
     scav1.takeDamage(8);
+    scav1.guardGate();
 
-    std::cout << RED << UNDERLINE << BOLD << "\n\t Destructing:\n" << RESET << std::endl;
+    std::cout << RED << UNDERLINE << BOLD << "\n\tDestructing:\n" << RESET << std::endl;
 
     return 0;
 }

@@ -25,7 +25,7 @@ ClapTrap::ClapTrap(const ClapTrap &other)
     std::cout << CYAN << "ClapTrap " << RESET << "copy constructor is called." << std::endl;
 }
 
-ClapTrap &ClapTrap::operator=(ClapTrap &other)
+ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 {
 
     if (this != &other)

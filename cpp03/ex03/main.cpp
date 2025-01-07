@@ -9,11 +9,11 @@ int main()
 {
     std::cout << RED << UNDERLINE << BOLD << "\n\tConstructing:\n"
               << RESET << std::endl;
-    DiamondTrap diamond("Hybrid");
+    DiamondTrap diamond("DT03-1");
 
     std::cout << RED << UNDERLINE << BOLD << "\n\tMember functions:\n"
               << RESET << std::endl;
-    diamond.attack("Enemy");
+    diamond.attack("DT03-2");
     diamond.takeDamage(30);
     diamond.beRepaired(20);
     diamond.highFivesGuys();

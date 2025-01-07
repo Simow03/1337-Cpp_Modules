@@ -7,23 +7,23 @@ const std::string UNDERLINE = "\033[4m";
 
 int main() {
 
-    std::cout << RED << UNDERLINE << BOLD << "\n\t Constructing:\n" << RESET << std::endl;
+    std::cout << RED << UNDERLINE << BOLD << "\n\tConstructing:\n" << RESET << std::endl;
     ClapTrap default_robot;
-    ClapTrap robot("R2D2");
+    ClapTrap robot("CT00-1");
     ClapTrap robot_copy(robot);
     ClapTrap another_robot;
     another_robot = robot;
     
-    std::cout << RED << UNDERLINE << BOLD << "\n\t Member functions:\n" << RESET << std::endl;
-    robot.attack("Enemy");
+    std::cout << RED << UNDERLINE << BOLD << "\n\tMember functions:\n" << RESET << std::endl;
+    robot.attack("CT00-2");
     robot.takeDamage(5);
     robot.beRepaired(3);
     robot.takeDamage(12);
-    robot.attack("Enemy");
+    robot.attack("CT00-2");
     robot.takeDamage(5);
     robot.beRepaired(3);
 
-    std::cout << RED << UNDERLINE << BOLD << "\n\t Destructing:\n" << RESET << std::endl;
+    std::cout << RED << UNDERLINE << BOLD << "\n\tDestructing:\n" << RESET << std::endl;
 
     return 0;
 }
