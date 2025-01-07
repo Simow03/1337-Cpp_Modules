@@ -3,7 +3,7 @@
 #include "DiamondTrap.hpp"
 #include "ClapTrap.hpp"
 
-const std::string ORANGE = "\033[38;5;216m";
+const std::string GREEN = "\033[38;5;121m";
 const std::string CYAN = "\033[38;5;117m";
 const std::string RESET = "\033[0m";
 
@@ -14,7 +14,7 @@ DiamondTrap::DiamondTrap()
     this->ScavTrap::energyPoints = 50;
     this->FragTrap::attackDamage = 30;
     ClapTrap::name = "Default_clap_name";
-    std::cout << ORANGE << "DiamondTrap " << RESET << "Default constructor called." << std::endl;
+    std::cout << GREEN << "DiamondTrap " << RESET << "Default constructor called." << std::endl;
 }
 
 DiamondTrap::DiamondTrap(const std::string &_name) 
@@ -24,7 +24,7 @@ DiamondTrap::DiamondTrap(const std::string &_name)
     this->ScavTrap::energyPoints = 50;
     this->FragTrap::attackDamage = 30;
     ClapTrap::name = _name + "_clap_name";
-    std::cout << ORANGE << "DiamondTrap " << RESET << this->name << " is being constructed .." << std::endl;
+    std::cout << GREEN << "DiamondTrap " << RESET << this->name << " is being constructed .." << std::endl;
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap &other)
@@ -33,7 +33,7 @@ DiamondTrap::DiamondTrap(const DiamondTrap &other)
     this->hitPoints = other.hitPoints;
     this->energyPoints = other.energyPoints;
     this->attackDamage = other.attackDamage;
-    std::cout << ORANGE << "DiamondTrap " << RESET << "copy constructor is called." << std::endl;
+    std::cout << GREEN << "DiamondTrap " << RESET << "copy constructor is called." << std::endl;
 }
 
 DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other)
@@ -45,13 +45,13 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other)
         this->energyPoints = other.energyPoints;
         this->attackDamage = other.attackDamage;
     }
-    std::cout << ORANGE << "DiamondTrap " << RESET << "copy assignment operator called" << std::endl;
+    std::cout << GREEN << "DiamondTrap " << RESET << "copy assignment operator called" << std::endl;
     return *this;
 }
 
 DiamondTrap::~DiamondTrap()
 {
-    std::cout << ORANGE << "DiamondTrap " << RESET << this->name << " is getting destroyed !" << std::endl;
+    std::cout << GREEN << "DiamondTrap " << RESET << this->name << " is getting destroyed !" << std::endl;
 };
 
 void DiamondTrap::attack(const std::string &target)
@@ -61,5 +61,5 @@ void DiamondTrap::attack(const std::string &target)
 
 void DiamondTrap::whoAmI()
 {
-    std::cout << ORANGE << "DiamondTrap " << RESET << this->name << " A.K.A " << CYAN << "ClapTrap " << RESET << ClapTrap::name << std::endl;
+    std::cout << GREEN << "DiamondTrap " << RESET << this->name << " A.K.A " << CYAN << "ClapTrap " << RESET << ClapTrap::name << std::endl;
 };
