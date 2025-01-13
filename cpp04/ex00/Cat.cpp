@@ -2,7 +2,7 @@
 
 Cat::Cat() : Animal() {
     this->type = "Cat";
-    std::cout << "Cat default constructor called." << std::endl;
+    std::cout << YELLOW << "Cat " << RESET << "default constructor called." << std::endl;
 }
 
 Cat::Cat(const Cat &other) : Animal(other) {
@@ -12,15 +12,15 @@ Cat::Cat(const Cat &other) : Animal(other) {
 Cat& Cat::operator=(const Cat &other) {
     if(this != &other)
         Animal::operator=(other);
-    std::cout << "Cat assignment operator called." << std::endl;
+    std::cout << YELLOW << "Cat " << RESET << "assignment operator called." << std::endl;
 
     return *this;
 }
 
 Cat::~Cat() {
-    std::cout << "Cat destructor is called." << std::endl;
+    std::cout << YELLOW << "Cat " << RESET << "destructor is called." << std::endl;
 }
 
 void Cat::makeSound() const{
-    std::cout << "Cat is meowing" << std::endl;
+    std::cout << YELLOW << "Cat " << RESET << "is meowing" << std::endl;
 }
