@@ -13,7 +13,7 @@ public :
     WrongAnimal(const WrongAnimal &other);
     WrongAnimal& operator=(const WrongAnimal &other);
     ~WrongAnimal();
-    void makeSound() const;
+    void makeSound(void) const;
     std::string getType(void) const;
 };
 
