@@ -1,4 +1,4 @@
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
 
@@ -14,10 +14,14 @@ int main()
         std::cout << RED << UNDERLINE << BOLD << "\n\tAbstract Class:\n"
                   << RESET << std::endl;
 
-        std::cout << UNDERLINE << "=== Using Animal pointers : ===" << RESET << std::endl;
-        Animal *i = new Cat();
-        Animal *j = new Dog();
+        std::cout << UNDERLINE << "=== Using AAnimal pointers : ===" << RESET << std::endl;
+        AAnimal *i = new Cat();
+        AAnimal *j = new Dog();
 
+        std::cout << "Calling getType() using Cat pointer : " << std::endl;
+        std::cout << i->getType() << std::endl;
+        std::cout << "Calling getType() using Dog pointer : " << std::endl;
+        std::cout << j->getType() << std::endl;
         std::cout << "Calling makeSound() using Cat pointer : " << std::endl;
         i->makeSound();
         std::cout << "Calling makeSound() using Dog pointer : " << std::endl;
