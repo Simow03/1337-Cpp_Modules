@@ -1,12 +1,10 @@
 #include "Animal.hpp"
 
-Animal::Animal() {
-    this->type = "Animal";
+Animal::Animal() : type("Animal") {
     std::cout << CYAN << "Animal " << RESET << "default constructor called." << std::endl;
 }
 
-Animal::Animal(const Animal &other) {
-    this->type = other.type;
+Animal::Animal(const Animal &other) : type(other.type) {
     std::cout << CYAN << "Animal " << RESET << "copy constructor called." << std::endl;
 }
 
