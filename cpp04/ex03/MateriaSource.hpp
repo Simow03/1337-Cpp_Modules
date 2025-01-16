@@ -5,13 +5,13 @@
 class MateriaSource : public IMateriaSource {
 private:
     static const int size = 4;
-    AMateria* templates[4];
+    AMateria* templates[size];
 
 public:
     MateriaSource();
     MateriaSource(const MateriaSource& other);
     MateriaSource& operator=(const MateriaSource& other);
-    ~MateriaSource();
+    virtual ~MateriaSource();
     void learnMateria(AMateria *);
     AMateria *createMateria(std::string const &type);
 };

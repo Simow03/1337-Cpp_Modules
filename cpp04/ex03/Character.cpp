@@ -1,16 +1,21 @@
 #include "Character.hpp"
-#include <algorithm>
 
 Character::Character() : name("npc")
 {
     for (int i = 0; i < size; i++)
+    {
         inventory[i] = NULL;
+        droppedMaterias[i] = NULL;
+    }
 };
 
 Character::Character(std::string const &_name) : name(_name)
 {
     for (int i = 0; i < size; i++)
+    {
         inventory[i] = NULL;
+        droppedMaterias[i] = NULL;
+    }
 };
 
 Character::Character(const Character &other) : name(other.name)
@@ -21,6 +26,8 @@ Character::Character(const Character &other) : name(other.name)
             inventory[i] = other.inventory[i]->clone();
         else
             inventory[i] = NULL;
+
+        droppedMaterias[i] = NULL;
     }
 }
 
@@ -30,7 +37,12 @@ Character &Character::operator=(const Character &other)
     if (this != &other)
     {
         for (int i = 0; i < size; i++)
+        {
             delete inventory[i];
+            delete droppedMaterias[i];
+            inventory[i] = NULL;
+            droppedMaterias[i] = NULL;
+        }
 
         this->name = other.name;
 
@@ -50,6 +62,9 @@ Character::~Character()
 {
     for (int i = 0; i < size; i++)
         delete inventory[i];
+
+    for (int i = 0; i < size; i++)
+        delete droppedMaterias[i];
 }
 
 std::string const &Character::getName() const
@@ -74,7 +89,17 @@ void Character::equip(AMateria *m)
 void Character::unequip(int idx)
 {
     if (idx >= 0 && idx < size && inventory[idx])
-        inventory[idx] = NULL;
+    {
+        for (int i = 0; i < size; i++)
+        {
+            if (!droppedMaterias[i])
+            {
+                droppedMaterias[i] = inventory[idx];
+                inventory[idx] = NULL;
+                return ;
+            }
+        }
+    }
 }
 
 void Character::use(int idx, ICharacter &target)

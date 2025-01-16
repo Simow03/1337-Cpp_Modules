@@ -9,6 +9,7 @@ private :
     std::string name;
     static const int size = 4;
     AMateria* inventory[size];
+    AMateria* droppedMaterias[size];
 
 public :
     Character();
