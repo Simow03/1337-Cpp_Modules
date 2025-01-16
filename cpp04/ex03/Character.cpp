@@ -1,7 +1,7 @@
 #include "Character.hpp"
 #include <algorithm>
 
-Character::Character() : name("Default")
+Character::Character() : name("npc")
 {
     for (int i = 0; i < size; i++)
         inventory[i] = NULL;
@@ -67,6 +67,8 @@ void Character::equip(AMateria *m)
             return;
         }
     }
+
+    delete m;
 }
 
 void Character::unequip(int idx)

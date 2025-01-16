@@ -4,8 +4,13 @@
 #include "Cure.hpp"
 #include "MateriaSource.hpp"
 
+void f() {
+    system("leaks interfaces");
+}
+
 int main()
 {
+    atexit(f);
     IMateriaSource *src = new MateriaSource();
     src->learnMateria(new Ice());
     src->learnMateria(new Cure());
@@ -27,7 +32,7 @@ int main()
     copy->use(0, *bob);
 
     Character *full = new Character("full");
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 5; i++)
         full->equip(src->createMateria("ice"));
 
     full->unequip(0);
