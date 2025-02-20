@@ -57,3 +57,13 @@ std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat) {
     os << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
     return os;
 }
+
+virtual const char* GradeTooHighException::what() const throw() {
+    return "Grade too high, Maximun grade : 1";
+}
+virtual const char* GradeTooLowException::what() const throw() {
+    return "Grade too low, Minimun grade is : 150";
+}
+virtual const char* FormNotSignedException::what() const throw() {
+    return "Form needs to be signed before execution";
+}

@@ -29,15 +29,11 @@ public:
 
     class GradeTooHighException : public std::exception {
     public:
-        virtual const char* what() const throw() {
-            return "Grade too high, Maximun grade : 1";
-        }
+        virtual const char* what() const throw();
     };
     class GradeTooLowException : public std::exception {
     public:
-        virtual const char* what() const throw() {
-            return "Grade too low, Minimun grade is : 150";
-        }
+        virtual const char* what() const throw();
     };
 };
 
