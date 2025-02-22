@@ -4,7 +4,6 @@ int main() {
     try {
         std::cout << "\nTest insertion : " << std::endl;
         Bureaucrat testCout("testCoutName", 100);
-
         std::cout << testCout << std::endl;
 
         std::cout << "\nIncrementing grade : " << std::endl;
