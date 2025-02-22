@@ -1,4 +1,4 @@
-NAME = form
+NAME = intern
 
 CXX = c++
 
