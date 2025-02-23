@@ -4,6 +4,10 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
+const std::string RESET = "\033[0m";
+const std::string BOLD = "\033[1m";
+const std::string UNDERLINE = "\033[4m";
+
 int main() {
     try {
         Bureaucrat president("President", 1);
@@ -12,23 +16,25 @@ int main() {
 
         ShrubberyCreationForm shrub("garden");
         RobotomyRequestForm robot("Bender");
-        PresidentialPardonForm pardon("Arthur Dent");
+        PresidentialPardonForm pardon("Arthur");
 
-        std::cout << "\n=== Testing Shrubbery Creation ===" << std::endl;
+        std::cout << UNDERLINE << BOLD << "\nTest Shrubbery Creation :" << RESET << std::endl;
         intern.signForm(shrub);
         intern.executeForm(shrub);
 
-        std::cout << "\n=== Testing Robotomy Request ===" << std::endl;
+        std::cout << UNDERLINE << BOLD << "\nTest Robotomy Request :" << RESET << std::endl;
         manager.signForm(robot);
         manager.executeForm(robot);
         
-        std::cout << "\n=== Testing Presidential Pardon ===" << std::endl;
+        RobotomyRequestForm unsignedRobot("Robot");
+        manager.executeForm(unsignedRobot);
+    
+        std::cout << UNDERLINE << BOLD << "\nTest Presidential Pardon :" << RESET << std::endl;
         manager.signForm(pardon);
         president.signForm(pardon);
         president.executeForm(pardon);
+        intern.executeForm(pardon);
 
-        RobotomyRequestForm unsignedRobot("R2D2");
-        manager.executeForm(unsignedRobot);
 
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << std::endl;

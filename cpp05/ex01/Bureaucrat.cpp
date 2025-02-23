@@ -58,10 +58,10 @@ std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat) {
     return os;
 }
 
-virtual const char* GradeTooHighException::what() const throw() {
+const char* Bureaucrat::GradeTooHighException::what() const throw() {
     return "Grade too high, Maximun grade : 1";
 }
 
-virtual const char* GradeTooLowException::what() const throw() {
+const char* Bureaucrat::GradeTooLowException::what() const throw() {
     return "Grade too low, Minimun grade is : 150";
 }
