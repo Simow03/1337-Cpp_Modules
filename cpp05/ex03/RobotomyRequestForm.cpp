@@ -3,10 +3,10 @@
 #include <ctime>
 
 RobotomyRequestForm::RobotomyRequestForm()
-    : AForm("ShrubberyCreation", 72, 45), target("Default") {}
+    : AForm("RobotomyRequest", 72, 45), target("Default") {}
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string& _target)
-    : AForm("ShrubberyCreation", 72, 45), target(_target) {}
+    : AForm("RobotomyRequest", 72, 45), target(_target) {}
 
 RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm& other)
     : AForm(other) , target(other.target) {}

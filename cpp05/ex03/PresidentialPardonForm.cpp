@@ -2,10 +2,10 @@
 #include <fstream>
 
 PresidentialPardonForm::PresidentialPardonForm()
-    : AForm("ShrubberyCreation", 145, 137), target("Default") {}
+    : AForm("PresidentialPardon", 145, 137), target("Default") {}
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string& _target)
-    : AForm("ShrubberyCreation", 145, 137), target(_target) {}
+    : AForm("PresidentialPardon", 145, 137), target(_target) {}
 
 PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm& other)
     : AForm(other) , target(other.target) {}
