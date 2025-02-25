@@ -2,6 +2,7 @@
 #define ScalarConverter_hpp
 
 #include <iostream>
+#include <exception>
 
 class ScalarConverter {
 private :
@@ -10,13 +11,17 @@ private :
     ScalarConverter& operator=(ScalarConverter& other);
     ~ScalarConverter();
 
-    bool isChar(const std::string& input);
-    bool isNumber(const std::string& input);
+    static bool isChar(const std::string& input);
+    static bool isNumber(const std::string& input);
+    static bool isLiteral(const std::string& input); 
 
-    void convertChar(char c);
-    void convertNumber(std::string& input);
+    static void convertChar(const char c);
+    static void convertNumber(const std::string& input);
+    static void convertLiteral(const std::string& input);
+
 public :
-    static convert(std::string& input);
+    static void convert(const std::string& input);
+
 };
 
 #endif

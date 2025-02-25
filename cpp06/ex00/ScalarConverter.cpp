@@ -1,6 +1,9 @@
 #include "ScalarConverter.hpp"
 #include <string>
 #include <cctype>
+#include <cmath>
+#include <climits>
+#include <iomanip>
 
 ScalarConverter::ScalarConverter() {}
 
@@ -17,25 +20,38 @@ ScalarConverter& ScalarConverter::operator=(ScalarConverter& other) {
 ScalarConverter::~ScalarConverter() {}
 
 bool ScalarConverter::isChar(const std::string& input) {
-    return (input.length() == 1)
+    return (input.length() == 1);
 }
 
-bool isLiteral(cont std::string& input) {
+bool ScalarConverter::isLiteral(const std::string& input) {
     return (input == "nan" || input == "+inf" || input == "-inf"
-            || input == "nanf" || input == "+inff" || input == "-inff")
+            || input == "nanf" || input == "+inff" || input == "-inff");
+}
+
+bool isInfinite(double val) {
+    return (val != 0 && val == val && val * 2 == val);
+}
+
+bool isPositiveInfinity(double val) {
+    return isInfinite(val) && val > 0;
+}
+
+bool isNegativeInfinity(double val) {
+    return isInfinite(val) && val < 0;
 }
 
 bool ScalarConverter::isNumber(const std::string& input) {
-    int count = 0;
+    size_t count = 0;
     bool dot = false;
     bool f = false;
+    bool hasDigit = false;
 
     if (isLiteral(input))
         return true;
     if (input.empty())
         return false;
 
-    if (input[0] == '-' || input == '+')
+    if (input[0] == '-' || input[0] == '+')
         count++;
 
     if (count >= input.length())
@@ -43,14 +59,16 @@ bool ScalarConverter::isNumber(const std::string& input) {
 
     for (; count < input.length(); count++)
     {
-        if (isdigit(input[i]))
+        if (isdigit(input[count])) {
+            hasDigit = true;
             continue;
-        else if (input[i] == '.') {
+        }
+        else if (input[count] == '.') {
             if (dot)
                 return false;
             dot = true;
         }
-        else if (input[i] == 'f' && i == input.length() - 1) {
+        else if (input[count] == 'f' && count == input.length() - 1) {
             if (f)
                 return false;
             f = true;
@@ -59,18 +77,10 @@ bool ScalarConverter::isNumber(const std::string& input) {
             return false;
     }
 
-    bool hasDigit = false;
-    for (size_t i = count; i < input.length(); i++) {
-        if (isdigit(input[i])) {
-            hasDigit = true;
-            break;
-        }
-    }
-
     return hasDigit;
 }
 
-ScalarConverter::convertChar(char c) {
+void ScalarConverter::convertChar(const char c) {
     std::cout << "char: ";
     if (isprint(c))
         std::cout << c << std::endl;
@@ -82,10 +92,74 @@ ScalarConverter::convertChar(char c) {
     std::cout << "double: " << static_cast<double>(c) << ".0" << std::endl;
 }
 
-ScalarConverter::convert(std::string& input) {
-    if (isChar(input))
+void ScalarConverter::convertNumber(const std::string& input) {
+
+    std::string newInput = (input[input.length() - 1] == 'f') ? input.substr(0, input.length() - 1) : input;
+
+    double doubleNumber = strtod(newInput.c_str(), NULL);
+    float floatNumber = static_cast<float>(doubleNumber);
+
+    if (doubleNumber >= 0 && doubleNumber <= 127)
+    {
+        if (isprint(doubleNumber))
+            std::cout << "char: " << static_cast<char>(doubleNumber) << std::endl;
+        else
+            std::cout << "char: Non displayable" << std::endl;
+    }
+    else
+        std::cout << "char: impossible" << std::endl;
+
+    if (doubleNumber <= INT_MAX && doubleNumber >= INT_MIN)
+        std::cout << "int: " << static_cast<int>(doubleNumber) << std::endl;
+    else
+        std::cout << "int: impossible" << std::endl;
+
+    if (isPositiveInfinity(floatNumber))
+        std::cout << "float: +inff" << std::endl;
+    else if (isNegativeInfinity(floatNumber))
+        std::cout << "float: -inff" << std::endl;
+    else
+        std::cout << "float: " << std::fixed << std::setprecision(1) << floatNumber << "f" << std::endl;
+
+    if (isPositiveInfinity(doubleNumber))
+        std::cout << "double: +inf" << std::endl;
+    else if (isNegativeInfinity(doubleNumber))
+        std::cout << "double: -inf" << std::endl;
+    else
+        std::cout << "double: " << std::fixed << std::setprecision(1) << doubleNumber << std::endl;
+}
+
+void ScalarConverter::convertLiteral(const std::string& input) {
+    if (input == "nan" || input == "nanf") {
+        std::cout << "char: impossible" << std::endl;
+        std::cout << "int: impossible" << std::endl;
+        std::cout << "float: nan" << std::endl;
+        std::cout << "double: nanf" << std::endl;
+    }
+    else if (input == "+inf" || input == "+inff") {
+        std::cout << "char: impossible" << std::endl;
+        std::cout << "int: impossible" << std::endl;
+        std::cout << "float: +inff" << std::endl;
+        std::cout << "double: +inf" << std::endl;
+    }
+    else if (input == "-inf" || input == "-inff") {
+        std::cout << "char: impossible" << std::endl;
+        std::cout << "int: impossible" << std::endl;
+        std::cout << "float: -inff" << std::endl;
+        std::cout << "double: -inf" << std::endl;
+    }
+}
+
+void ScalarConverter::convert(const std::string& input) {
+    if(isLiteral(input))
+        convertLiteral(input);
+
+    else if (isChar(input))
         convertChar(input[0]);
-    
+
     else if (isNumber(input))
         convertNumber(input);
+
+    else
+        std::cout << "Error: Invalid Input" << std ::endl;
 }
