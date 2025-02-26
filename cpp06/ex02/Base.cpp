@@ -10,6 +10,12 @@ Base::~Base() {}
 
 Base* Base::generate(void){
 
+    static bool flag = true;
+    if (flag) {
+        std::srand(time(0));
+        flag = false;
+    }
+
     int randNumber = std::rand() % 3;
 
     switch (randNumber)
