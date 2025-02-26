@@ -2,19 +2,18 @@
 
 #include "Serializer.hpp"
 #include "Data.hpp"
-
 #include <iostream>
+
+const std::string RESET = "\033[0m";
+const std::string GREEN = "\033[38;5;121m";
+const std::string CYAN = "\033[38;5;117m";
+const std::string YELLOW = "\033[93m";
+const std::string RED = "\033[31m";
+const std::string UNDERLINE = "\033[4m";
 
 int main() {
 
     Data original(213, 'A', true);
-
-    const std::string RESET = "\033[0m";
-    const std::string GREEN = "\033[32m";
-    const std::string CYAN = "\033[36m";
-    const std::string YELLOW = "\033[33m";
-    const std::string RED = "\033[31m";
-    const std::string UNDERLINE = "\033[4m";
 
     std::cout << CYAN << UNDERLINE << "Original pointer:" << RESET << " " << &original << std::endl;
     std::cout << YELLOW << UNDERLINE << "Original data:" << RESET
