@@ -29,6 +29,6 @@ int main() {
 
     std::cout << UNDERLINE << "\nafter iter :" << RESET << std::endl;
     iter(strArr, 3, print<std::string>);
-    std::cout << std::endl;
+    std::cout << "\n" << std::endl;
     
 }

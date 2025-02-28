@@ -1,4 +1,4 @@
-NAME = functions
+NAME = iter
 
 CXX = c++
 
@@ -6,7 +6,7 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRCS = main.cpp
 
-HEADERS = whatever.hpp
+HEADERS = iter.hpp
 
 OBJS = ${SRCS:.cpp=.o}
 
