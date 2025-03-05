@@ -1,4 +1,4 @@
-NAME = easyfind
+NAME = ex00
 
 CXX = c++
 
