@@ -1,5 +1,31 @@
 #include <string>
 #include <iostream>
+#include "BitcoinExchange.hpp"
+
+std::string readFromFile(std::string filename) {
+    std::ifstream inputFile(filename.c_str());
+    if (!inputFile.is_open()) {
+        std::cerr << "Error: could not open file." << std::endl;
+        exit(1);
+    }
+    std::stringstream fileContentStream;
+
+    fileContentStream << inputFile.rdbuf();
+
+    return fileContentStream.str();
+}
+
+std::string trimWhitespace(const std::string& str) {
+    if(str.empty())
+        return str;
+    
+    size_t first = str.find_first_not_of(" \t");
+    if (first == std::string::npos)
+        return "";
+
+    size_t last = str.find_last_not_of(" \t");
+    return str.substr(first, (last - first + 1));
+}
 
 int countSegments(const std::string& str, char delimiter) {
     int count = 0;
