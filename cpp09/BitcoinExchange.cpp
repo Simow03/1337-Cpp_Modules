@@ -74,6 +74,28 @@ bool validateValue(std::string& value) {
     return true;
 }
 
+std::map<std::string, double> storeDataBase() {
+
+    std::map<std::string, double> dataMap;
+
+    std::string fileContent = readFromFile("data.csv");
+
+    std::string* contentArray = splitString(fileContent, '\n');
+
+    size_t count = atoi(contentArray[0].c_str());
+
+    for(size_t i = 2; i <= count; i++) {
+        std::string* dateRateArray = splitString(contentArray[i], ',');
+
+        dataMap[dateRateArray[1]] = std::strtod(dateRateArray[2].c_str(), NULL);
+
+        freeSplitString(dateRateArray);
+    }
+    freeSplitString(contentArray);
+
+    return dataMap;
+}
+
 void parseInputFile(std::map<std::string, double> dataMap) {
 
     (void)dataMap;
@@ -114,7 +136,14 @@ void parseInputFile(std::map<std::string, double> dataMap) {
             continue;
         }
 
-        // double value = std::strtod(valueStr.c_str(), NULL);
+        double value = std::strtod(valueStr.c_str(), NULL);
+
+        std::map<std::string, double>::iterator it = dataMap.lower_bound(dateStr);
+
+        if (it->first != dateStr)
+            it--;
+
+        std::cout << dateStr << " => " << value << " = " << it->second * value << std::endl;
 
         freeSplitString(dateValueArray);
     }

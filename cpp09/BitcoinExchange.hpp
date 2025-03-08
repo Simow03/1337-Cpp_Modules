@@ -8,6 +8,7 @@
 #include <map>
 
 bool isValidFileName(std::string filename);
+std::map<std::string, double> storeDataBase(void);
 void parseInputFile(std::map<std::string, double> dataMap);
 std::string readFromFile(std::string filename);
 std::string trimWhitespace(const std::string& str);
