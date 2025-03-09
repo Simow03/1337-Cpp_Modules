@@ -1,5 +1,3 @@
-#include <string>
-#include <iostream>
 #include "BitcoinExchange.hpp"
 
 std::string readFromFile(std::string filename) {
