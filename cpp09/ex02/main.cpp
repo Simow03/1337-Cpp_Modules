@@ -2,7 +2,7 @@
 
 int main(int ac, char **av) {
 
-    if (ac < 3) {
+    if (ac < 2) {
         std::cerr << "Error" << std::endl;
         return 1;
     }
@@ -21,5 +21,7 @@ int main(int ac, char **av) {
 
     std::vector<int> sorted = mergeInsertionSort(numbers);
 
-    displayOutput();
+    for (std::vector<int>::iterator it = sorted.begin(); it != sorted.end(); ++it)
+        std::cout << *it << std::endl;
+    // displayOutput();
 }
