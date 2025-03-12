@@ -7,7 +7,7 @@ bool isValidFileName(std::string filename) {
 bool validateDate(std::string& date) {
     if (date.length() != 10 || date[4] != '-' || date[7] != '-')
         return false;
-    
+
     std::string yearStr = date.substr(0, 4);
     std::string monthStr = date.substr(5, 2);
     std::string dayStr = date.substr(8, 2);
@@ -26,6 +26,8 @@ bool validateDate(std::string& date) {
     int month = atoi(monthStr.c_str());
     int day = atoi(dayStr.c_str());
 
+    if (year < 2009 || (year == 2009 && month == 1 && day <= 1))
+        return false;
     if (year < 0 || month < 1 || month > 12 || day < 1 || day > 31)
         return false;
     if (month == 4 || month == 6 || month == 9 || month == 11) {
