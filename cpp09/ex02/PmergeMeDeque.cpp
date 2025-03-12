@@ -1,37 +1,11 @@
 #include "PmergeMe.hpp"
 
-double ELAPSED_VECTOR;
+double ELAPSED_DEQUE;
 
-bool isPositiveInteger(std::string input) {
-
-    for (size_t i = 0; i < input.length(); i++) {
-        if ((!isdigit(input[i]) && input[i] != '+') || (input[i] == '+' && i != 0))
-            return false;
-    }
-
-    if (input.length() > 1 && input[0] == '0')
-        return false;
-
-    double value = std::strtod(input.c_str(), NULL);
-
-    if (value > INT_MAX)
-        return false;
-
-    return true;
-}
-
-int jacobsthal(int n) {
-    if (n == 0)
-        return 0;
-    if (n == 1)
-        return 1;
-    return jacobsthal(n - 1) + 2 * jacobsthal(n - 2);
-}
-
-std::vector<int> getJacobsthalOrder(int size) {
-    std::vector<int> indices;
+std::deque<int> getJacobsthalOrderDeque(int size) {
+    std::deque<int> indices;
     
-    std::vector<int> jacobNumbers;
+    std::deque<int> jacobNumbers;
     jacobNumbers.push_back(0);
     jacobNumbers.push_back(1);
     
@@ -60,10 +34,9 @@ std::vector<int> getJacobsthalOrder(int size) {
     return indices;
 }
 
-std::vector<int> mergeInsertionSort(std::vector<int>& numbers) {
+std::deque<int> mergeInsertionSortDeque(std::deque<int>& numbers) {
 
     clock_t start = clock();
-
     int vecSize = numbers.size();
 
     if (vecSize <= 1)
@@ -77,7 +50,7 @@ std::vector<int> mergeInsertionSort(std::vector<int>& numbers) {
         vecSize--;
     }
 
-    std::vector<std::pair<int, int> > pairs;
+    std::deque<std::pair<int, int> > pairs;
     for (int i = 0; i < vecSize; i+=2) {
             if (numbers[i] <= numbers[i+1]) 
                 pairs.push_back(std::make_pair(numbers[i], numbers[i+1]));
@@ -85,25 +58,25 @@ std::vector<int> mergeInsertionSort(std::vector<int>& numbers) {
                 pairs.push_back(std::make_pair(numbers[i+1], numbers[i]));
     }
 
-    std::vector<int> mainChain;
-    for (std::vector<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
+    std::deque<int> mainChain;
+    for (std::deque<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
         mainChain.push_back(it->second);
     
-    mainChain = mergeInsertionSort(mainChain);
+    mainChain = mergeInsertionSortDeque(mainChain);
 
-    std::vector<int> result;
+    std::deque<int> result;
     result.push_back(pairs[0].first);
 
-    for (std::vector<int>::iterator it = mainChain.begin(); it != mainChain.end(); ++it)
+    for (std::deque<int>::iterator it = mainChain.begin(); it != mainChain.end(); ++it)
         result.push_back(*it);
     
-    std::vector<int> pendElements;
+    std::deque<int> pendElements;
     for (size_t i = 1; i < pairs.size(); i++)
         pendElements.push_back(pairs[i].first);
     
-    std::vector<int> indexOrder = getJacobsthalOrder(pendElements.size());
+    std::deque<int> indexOrder = getJacobsthalOrderDeque(pendElements.size());
 
-    for (std::vector<int>::iterator it = indexOrder.begin(); it != indexOrder.end(); ++it) {
+    for (std::deque<int>::iterator it = indexOrder.begin(); it != indexOrder.end(); ++it) {
         int element = pendElements[(*it) - 1];
         
         int low = 0;
@@ -134,7 +107,7 @@ std::vector<int> mergeInsertionSort(std::vector<int>& numbers) {
 
     clock_t end = clock();
 
-    ELAPSED_VECTOR = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
+    ELAPSED_DEQUE = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
 
     return result;
 }
