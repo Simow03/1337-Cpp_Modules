@@ -5,7 +5,7 @@ bool isValidFileName(std::string filename) {
 }
 
 bool validateDate(std::string& date) {
-    if (date.length() != 10 || date[4] != '-' || date[7] != '-')
+    if (date.length() != 11 || date[4] != '-' || date[7] != '-' || date[10] != ' ')
         return false;
 
     std::string yearStr = date.substr(0, 4);
@@ -45,10 +45,15 @@ bool validateDate(std::string& date) {
 
 bool validateValue(std::string& value) {
 
-    int startPos = (value[0] == '-' ? 1 : 0);
+    int startPos = (value[1] == '-' ? 2 : 1);
 
-    if (startPos != 0) {
+    if (startPos != 1) {
         std::cout << "Error: not a positive number." << std::endl;
+        return false;
+    }
+
+    if (value[0] != ' ') {
+        std::cout << "Error: bad input format." << std::endl;
         return false;
     }
 
@@ -63,8 +68,10 @@ bool validateValue(std::string& value) {
             break;
         }
     }
-    if (!isNumeric)
+    if (!isNumeric) {
+        std::cout << "Error: not a numeric number." << std::endl;
         return false;
+    }
 
     double doubleValue = std::strtod(value.c_str(), NULL);
 
@@ -119,24 +126,24 @@ void parseInputFile(std::map<std::string, double> dataMap) {
     for (size_t i = 2; i <= count; i++) {
         std::string* dateValueArray = splitString(contentArray[i], '|');
         size_t tokens = atoi(dateValueArray[0].c_str());
-        if (tokens != 2) {
+        if (tokens != 2 || containsMultiplePipe(contentArray[i])) {
             std::cout << "Error: bad input => " << contentArray[i] << std::endl;
+            freeSplitString(dateValueArray);
+            continue;
+        }
+
+        if (!validateDate(dateValueArray[1])) {
+            std::cout << "Error: bad date format => " << dateValueArray[1] << std::endl;
+            freeSplitString(dateValueArray);
+            continue;
+        }
+        if (!validateValue(dateValueArray[2])) {
             freeSplitString(dateValueArray);
             continue;
         }
 
         std::string dateStr = trimWhitespace(dateValueArray[1]);
         std::string valueStr = trimWhitespace(dateValueArray[2]);
-
-        if (!validateDate(dateStr)) {
-            std::cout << "Error: bad date format => " << dateStr << std::endl;
-            freeSplitString(dateValueArray);
-            continue;
-        }
-        if (!validateValue(valueStr)) {
-            freeSplitString(dateValueArray);
-            continue;
-        }
 
         double value = std::strtod(valueStr.c_str(), NULL);
 

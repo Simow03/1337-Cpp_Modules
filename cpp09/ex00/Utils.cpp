@@ -1,5 +1,17 @@
 #include "BitcoinExchange.hpp"
 
+bool containsMultiplePipe(std::string input) {
+
+    int count = 0;
+
+    for (size_t i = 0; i < input.length(); i++) {
+        if (input[i] == '|')
+            count++;
+    }
+
+    return (count > 1) ? true : false;
+}
+
 std::string readFromFile(std::string filename) {
     std::ifstream inputFile(filename.c_str());
     if (!inputFile.is_open()) {
