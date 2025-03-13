@@ -7,7 +7,7 @@ int main(int ac, char **av) {
         return 1;
     }
 
-    int result = calculateRPN(av[1]);
+    float result = calculateRPN(av[1]);
 
     std::cout << result << std::endl;
 }

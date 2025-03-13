@@ -4,7 +4,7 @@ bool isoperation(const char& op) {
     return (op == '+' || op == '-' || op == '*' || op == '/');
 }
 
-int runOperation(std::stack<int>& rpnStack, std::string* inputArray, size_t i) {
+void runOperation(std::stack<float>& rpnStack, std::string* inputArray, size_t i) {
 
     if (rpnStack.size() < 2) {
         std::cerr << "Error" << std::endl;
@@ -12,9 +12,9 @@ int runOperation(std::stack<int>& rpnStack, std::string* inputArray, size_t i) {
         exit(1);
     }
 
-    int n2 = rpnStack.top();
+    float n2 = rpnStack.top();
     rpnStack.pop();
-    int n1 = rpnStack.top();
+    float n1 = rpnStack.top();
     rpnStack.pop();
 
     char op = inputArray[i][0]; 
@@ -23,13 +23,13 @@ int runOperation(std::stack<int>& rpnStack, std::string* inputArray, size_t i) {
     {
     case '+':
         rpnStack.push(n1 + n2);
-        return n1 + n2;
+        break;
     case '-':
         rpnStack.push(n1 - n2);
-        return n1 - n2;
+        break;
     case '*':
         rpnStack.push(n1 * n2);
-        return n1 * n2;
+        break;
     case '/':
         if (n2 == 0) {
             std::cerr << "Error" << std::endl;
@@ -37,15 +37,14 @@ int runOperation(std::stack<int>& rpnStack, std::string* inputArray, size_t i) {
             exit(1);
         }
         rpnStack.push(n1 / n2);
-        return n1 / n2;
     default:
-        return -1;
+        break ;
     }
 }
 
-int calculateRPN(std::string input) {
+float calculateRPN(std::string input) {
 
-    std::stack<int> rpnStack;
+    std::stack<float> rpnStack;
 
     std::string* inputArray = splitString(input, ' ');
     size_t count = atoi(inputArray[0].c_str());

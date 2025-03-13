@@ -10,7 +10,7 @@
 int countSegments(const std::string& str, char delimiter);
 std::string* splitString(std::string fileContent, char delimiter);
 void freeSplitString(std::string* array);
-int calculateRPN(std::string input);
-int runOperation(std::stack<int>& rpnStack, std::string* inputArray, size_t i);
+float calculateRPN(std::string input);
+void runOperation(std::stack<float>& rpnStack, std::string* inputArray, size_t i);
 
 #endif
