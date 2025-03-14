@@ -2,41 +2,94 @@
 
 double ELAPSED_DEQUE;
 
-std::deque<int> getJacobsthalOrderDeque(int size) {
-    std::deque<int> indices;
-    
-    std::deque<int> jacobNumbers;
-    jacobNumbers.push_back(0);
-    jacobNumbers.push_back(1);
-    
-    while (jacobNumbers.back() < size) {
-        int next = jacobNumbers[jacobNumbers.size() - 1] + 2 * jacobNumbers[jacobNumbers.size() - 2];
-        jacobNumbers.push_back(next);
+std::deque<int> getJacobsthalOrderDeque(int size)
+{
+    std::deque<int> jacobsthalNumbers;
+    std::deque<int> result;
+
+    jacobsthalNumbers.push_back(0);
+    jacobsthalNumbers.push_back(1);
+    jacobsthalNumbers.push_back(3);
+
+    int nextNumber = 0;
+
+    for(int i = 3; i < size && nextNumber < size; i++) {
+        nextNumber = jacobsthalNumbers[i - 1] + (2 * jacobsthalNumbers[i - 2]);
+        jacobsthalNumbers.push_back(nextNumber);
     }
     
-    for (size_t i = 2; i < jacobNumbers.size(); i++) {
-        int current = jacobNumbers[i];
-        int previous = jacobNumbers[i-1];
-        
-        for (int k = current; k > previous; k--) {
-            if (k <= size) {
-                indices.push_back(k);
-            }
+    int lastValue = 1;
+    for(int i = 0; i < (int)jacobsthalNumbers.size(); i++) {
+
+        if(jacobsthalNumbers[i] < size)
+            result.push_back(jacobsthalNumbers[i]);
+
+        int currentValue = jacobsthalNumbers[i] -1;
+    
+        while(currentValue > lastValue)
+        {
+            if(currentValue < size)
+                result.push_back(currentValue);
+
+            currentValue--;
+        }
+
+        lastValue = jacobsthalNumbers[i];
+    }
+
+    return result;
+}
+
+std::deque<std::pair<int,int> > mergeSortDeque(std::deque<std::pair<int,int> > pairs)
+{
+    std::deque<std::pair<int,int> > right;
+    std::deque<std::pair<int,int> > left;
+    std::deque<std::pair<int,int> > res;
+
+    size_t i = 0;
+
+    for(;i < pairs.size() / 2; i++)
+        right.push_back(pairs[i]);
+
+    for(;i < pairs.size(); i++)
+        left.push_back(pairs[i]);
+
+    if(left.size() > 1)
+        left = mergeSortDeque(left);
+
+    if(right.size() > 1)
+        right = mergeSortDeque(right);
+
+    int x = 0;
+    int y = 0;
+
+    while((x < (int)left.size())|| (y < (int)right.size())) {
+
+        if(x == (int)left.size()) {
+            res.push_back(std::make_pair(right[y].first, right[y].second));
+            y++;
+        }
+        else if(y == (int)right.size()) {
+            res.push_back(std::make_pair(left[x].first, left[x].second));
+            x++;
+        }
+        else if(left[x].second <= right[y].second ) {
+            res.push_back(std::make_pair(left[x].first, left[x].second));
+            x++;
+        }
+        else {
+            res.push_back(std::make_pair(right[y].first, right[y].second));
+            y++;
         }
     }
 
-    for (int i = 1; i <= size; i++) {
-        if (std::find(indices.begin(), indices.end(), i) == indices.end()) {
-            indices.push_back(i);
-        }
-    }
-
-    return indices;
+    return res;
 }
 
 std::deque<int> mergeInsertionSortDeque(std::deque<int>& numbers) {
-
+    
     clock_t start = clock();
+
     int vecSize = numbers.size();
 
     if (vecSize <= 1)
@@ -52,62 +105,47 @@ std::deque<int> mergeInsertionSortDeque(std::deque<int>& numbers) {
 
     std::deque<std::pair<int, int> > pairs;
     for (int i = 0; i < vecSize; i+=2) {
-            if (numbers[i] <= numbers[i+1]) 
-                pairs.push_back(std::make_pair(numbers[i], numbers[i+1]));
-            else
-                pairs.push_back(std::make_pair(numbers[i+1], numbers[i]));
+        if (numbers[i] <= numbers[i+1]) 
+            pairs.push_back(std::make_pair(numbers[i], numbers[i+1]));
+        else
+            pairs.push_back(std::make_pair(numbers[i+1], numbers[i]));
     }
 
+    
+    pairs = mergeSortDeque(pairs);
     std::deque<int> mainChain;
-    for (std::deque<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
-        mainChain.push_back(it->second);
-    
-    mainChain = mergeInsertionSortDeque(mainChain);
-
-    std::deque<int> result;
-    result.push_back(pairs[0].first);
-
-    for (std::deque<int>::iterator it = mainChain.begin(); it != mainChain.end(); ++it)
-        result.push_back(*it);
-    
     std::deque<int> pendElements;
-    for (size_t i = 1; i < pairs.size(); i++)
+    
+    for (size_t i = 0; i < pairs.size(); i++)
+    {
+        if(i == 0) {
+            mainChain.push_back(pairs[i].first);
+            mainChain.push_back(pairs[i].second);
+            continue;
+        }
+        
+        mainChain.push_back(pairs[i].second);
         pendElements.push_back(pairs[i].first);
+    }
     
     std::deque<int> indexOrder = getJacobsthalOrderDeque(pendElements.size());
 
-    for (std::deque<int>::iterator it = indexOrder.begin(); it != indexOrder.end(); ++it) {
-        int element = pendElements[(*it) - 1];
-        
-        int low = 0;
-        int high = result.size();
-        while (low < high) {
-            int mid = low + (high - low) / 2;
-            if (result[mid] < element)
-                low = mid + 1;
-            else
-                high = mid;
-        }
-
-        result.insert(result.begin() + low, element);
+    int y = 0;
+    for(int i = 0; y < (int)pendElements.size();i++) {
+        if (indexOrder[i] >= (int)pendElements.size())
+            continue;
+        std::deque<int>::iterator pos = std::lower_bound(mainChain.begin(), mainChain.end(), pendElements[indexOrder[i]]);
+        mainChain.insert(pos,pendElements[indexOrder[i]]);
+        y++;
     }
-
-    if (isOdd) {
-        int low = 0;
-        int high = result.size();
-        while (low < high) {
-            int mid = low + (high - low) / 2;
-            if (result[mid] < oddElement)
-                low = mid + 1;
-            else
-                high = mid;
-        }
-        result.insert(result.begin() + low, oddElement);
+    if(isOdd) {
+        std::deque<int>::iterator pos = std::lower_bound(mainChain.begin(), mainChain.end(), oddElement);
+        mainChain.insert(pos, oddElement);
     }
 
     clock_t end = clock();
 
     ELAPSED_DEQUE = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
 
-    return result;
+    return mainChain;
 }
