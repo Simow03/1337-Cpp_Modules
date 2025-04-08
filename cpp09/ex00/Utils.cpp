@@ -62,9 +62,9 @@ std::string* splitString(std::string fileContent, char delimiter) {
 
     std::string* result = new std::string[segmentCount + 1];
     
-    char countStr[20];
-    sprintf(countStr, "%d", segmentCount);
-    result[0] = countStr;
+    std::ostringstream oss;
+    oss << segmentCount;
+    result[0] = oss.str();
 
     size_t i = 1;
     size_t start = 0;
